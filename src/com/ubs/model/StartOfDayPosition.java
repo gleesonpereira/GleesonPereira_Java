@@ -1,10 +1,10 @@
 package com.ubs.model;
 
-public class StartOfDayPosition  {
-	private String instrument;
-	private long account;
-	private char accountType;
-	private long quantity;
+public class StartOfDayPosition {
+	private final  String instrument;
+	private final long account;
+	private final char accountType;
+	private final long quantity;
 	
 	public StartOfDayPosition(String instrument, long account, char accountType, long quantity) {
 		this.instrument = instrument;
@@ -16,27 +16,33 @@ public class StartOfDayPosition  {
 	public String getInstrument() {
 		return instrument;
 	}
-	public void setInstrument(String instrument) {
-		this.instrument = instrument;
-	}
+	
 	public long getAccount() {
 		return account;
 	}
-	public void setAccount(long account) {
-		this.account = account;
-	}
+	
 	public char getAccountType() {
 		return accountType;
 	}
-	public void setAccountType(char accountType) {
-		this.accountType = accountType;
-	}
+
 	public long getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(long quantity) {
-		this.quantity = quantity;
+	
+	public int hashCode() {
+		return instrument.hashCode() + new Long(account).hashCode() + new Character(accountType).hashCode() + new Long(quantity).hashCode();
 	}
 	
+	public boolean equals(Object obj) {
+		if(obj instanceof StartOfDayPosition) {
+			StartOfDayPosition startOfDayPositionObject = (StartOfDayPosition) obj;
+			return (this.instrument.equals(startOfDayPositionObject.getInstrument()) &&
+					this.account == startOfDayPositionObject.getAccount() &&
+					this.accountType == startOfDayPositionObject.getAccountType() &&
+					this.quantity == startOfDayPositionObject.getQuantity()
+					);
+		}
+		return false;
+	}
 	
 }

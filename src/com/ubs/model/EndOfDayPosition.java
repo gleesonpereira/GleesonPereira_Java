@@ -1,11 +1,11 @@
 package com.ubs.model;
 
 public class EndOfDayPosition {
-	private String instrument;
-	private long account;
-	private char accountType;
-	private long quantity;
-	private long delta;
+	private final String instrument;
+	private final long account;
+	private final char accountType;
+	private final long quantity;
+	private final long delta;
 	
 	public EndOfDayPosition(String instrument, long account, char accountType, long quantity, long delta) {
 		this.instrument = instrument;
@@ -18,32 +18,38 @@ public class EndOfDayPosition {
 	public String getInstrument() {
 		return instrument;
 	}
-	public void setInstrument(String instrument) {
-		this.instrument = instrument;
-	}
+	
 	public long getAccount() {
 		return account;
 	}
-	public void setAccount(long account) {
-		this.account = account;
-	}
+	
 	public char getAccountType() {
 		return accountType;
 	}
-	public void setAccountType(char accountType) {
-		this.accountType = accountType;
-	}
+	
 	public long getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(long quantity) {
-		this.quantity = quantity;
-	}
+	
 	public long getDelta() {
 		return delta;
 	}
-	public void setDelta(long delta) {
-		this.delta = delta;
+	
+	public int hashCode() {
+		return instrument.hashCode() + new Long(account).hashCode() + new Character(accountType).hashCode() + new Long(quantity).hashCode() + new Long(delta).hashCode();
+	}
+	
+	public boolean equals(Object obj) {
+		if(obj instanceof EndOfDayPosition) {
+			EndOfDayPosition endOfDayPositionObject = (EndOfDayPosition) obj;
+			return (this.instrument.equals(endOfDayPositionObject.getInstrument()) &&
+					this.account == endOfDayPositionObject.getAccount() &&
+					this.accountType == endOfDayPositionObject.getAccountType() &&
+					this.quantity == endOfDayPositionObject.getQuantity() &&
+					this.delta == endOfDayPositionObject.getDelta()
+					);
+		}
+		return false;
 	}
 	
 	public String toString() {
